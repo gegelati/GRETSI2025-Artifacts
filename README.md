@@ -12,7 +12,7 @@ The repository contains:
 ```
 ├─ sips22-artifacts                                  # root folder
 │  │                                           
-│  ├─ gegelati                                       # git submodule pointing to gegelati v1.3.1
+│  ├─ gegelati                                       # git submodule pointing to gegelati develop commit: 9b4092f
 │  │  │...                                     
 │  │                                           
 │  ├─ armlearn-wrapper                               # git submodule pointing to the ArmLearn Environment
