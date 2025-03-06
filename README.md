@@ -11,7 +11,7 @@ Ce répertoire contient:
 
 ## Exécution du code
 
-Pour exécuter le code, il faut d'abord le cloner et installer la bibliothèque, cela peut prendre quelques minutes.
+Pour exécuter le code, il faut d'abord le cloner et installer les bibliothèques, cela peut prendre quelques minutes.
 ```
 git clone --recurse-submodules  https://github.com/gegelati/GRETSI2025-Artifacts.git
 cd GRETSI2025-Artifacts/armlearn-wrapper
