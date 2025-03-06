@@ -8,13 +8,28 @@ $ ./scripts/dependencies_installation.sh
 ```
 
 Then compile the wrapper code
+
 ```
-$ mkdir build && cd build
-& cmake .. && cmake --build .
+mkdir build && cd build
+cmake .. && cmake --build .
+cd ..
 ```
 
-Different executables are created 
+Five executables are created
 
+- armGegelati: main executable to train or test a TPG on the armLearn Wrapper.
+- armMultipleTraining : pour lancer plusieurs entrainement sur plusieurs configurations indiquées dans le dossier params/repoConfig.
+- armGraphPruner : pour élaguer un TPG après l'entrainement et générer le code C.
+- armCodeGen : pour éxécuter le code généré et exporter les données d'inférence dans outputGegelati.csv.
+- armGrabGegelati/armGrabStandalone : pour utiliser le TPG ou des coordonnées brutes sur le bras physique (inutilisable dans ce cas).
+
+Different executables are created, vous pouvez les utilisez en exécutant 
+
+```
+./build/armGegelati
+./build/armGraphPruner 
+etc...
+```
 
 ## things
 
