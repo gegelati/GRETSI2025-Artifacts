@@ -1,29 +1,40 @@
-# PPSN 2024 Artifacts
+# GRETSI 2025 Artefacts
 
-To execute the code, first clone the code and install the library
+Ce répertoire est associé à la publication suivante **(under review)** :
+
+*Q. Vacher, N. Beuve, P. Allaire, T. Marty, M. Dardaillon and K. Desnos. Graphes de Programmes Intriqués Appliqués à la Prédiction de Trajectoire de Bras Robotique*
+
+Ce répertoire contient:
+* Le code et les scripts pour reproduire les expérimentations du papier.
+* Les données expérérimentales et le notebook pour calculer les résultats.
+
+
+## Exécution du code
+
+Pour exécuter le code, il faut d'abord le cloner et installer la bibliothèque, cela peut prendre quelques minutes.
 ```
-$ git clone https://github.com/gegelati/GRETSI2025.git
+$ git clone --recurse-submodules  https://github.com/gegelati/GRETSI2025-Artifacts.git
 $ cd GRETSI_2025/armlearn-wrapper
-$ ./scripts/dependencies_installation.sh
+$ sudo ./scripts/dependencies_installation.sh
 ```
 
-Then compile the wrapper code
+Puis, compilez le code du wrapper du bras robotique.
 
 ```
 mkdir build && cd build
-cmake .. && cmake --build .
+cmake .. && cmake --build . -j
 cd ..
 ```
 
-Five executables are created
+Cinq exécutables sont créés.
 
-- armGegelati: main executable to train or test a TPG on the armLearn Wrapper.
-- armMultipleTraining : pour lancer plusieurs entrainement sur plusieurs configurations indiquées dans le dossier params/repoConfig.
-- armGraphPruner : pour élaguer un TPG après l'entrainement et générer le code C.
-- armCodeGen : pour éxécuter le code généré et exporter les données d'inférence dans outputGegelati.csv.
-- armGrabGegelati/armGrabStandalone : pour utiliser le TPG ou des coordonnées brutes sur le bras physique (inutilisable dans ce cas).
+* armGegelati : le principal exécutable pour entraîner ou tester un TPG sur le wrapper du bras robotique.
+* armMultipleTraining : pour lancer plusieurs entraînements sur plusieurs configurations indiquées dans le dossier « params/repoConfig ».
+* armGraphPruner : pour élaguer un TPG après l'entraînement et générer le code C.
+* armCodeGen : pour exécuter le code généré et exporter les données d'inférence dans outputGegelati.csv.
+* armGrabGegelati/armGrabStandalone : pour utiliser le TPG ou des coordonnées brutes sur le bras physique (inutilisable dans ce cas).
 
-Different executables are created, vous pouvez les utilisez en exécutant 
+Différents exécutables sont créés, vous pouvez les utiliser en les exécutant. 
 
 ```
 ./build/armGegelati
@@ -31,64 +42,52 @@ Different executables are created, vous pouvez les utilisez en exécutant
 etc...
 ```
 
-## things
+Un dossier "params" se trouve dans le dossier armlearn-wrapper.
+Dans ce dossier "params" se trouve les fichiers de configuration pour modifier l'entrainement.
+Notamment dans params.json: 
+* maxNbActionsPerEval: permet de modifier le nombre d'actions (par défaut 1500 actions)
+* mutation.tpg.nbRoots: permet de modifier le nombre d'agents (par défaut 2000 agents)
 
+Diminuer ces deux valeurs permet de tester le code plus rapidement.
 
-This repository is associated to the following publication **(under review)**:
-
-*Q. Vacher, N. Beuve, P. Allaire, T. Marty, M. Dardaillon and K. Desnos. Low-complexity Genetic Reinforcement Learning for Robot Arm Trajectory Planning*
-
-The repository contains:
-* Code and scripts to reproduce the experiments presented in the paper.
-* Experimental data and logs produced by the authors and presented in the paper.
-
-## Repository content
+## Contenu de répertoire
 ```
-├─ sips22-artifacts                                  # root folder
+├─ GRETSI2025-artifacts                              # Dossier racine.
+│  │                                                                       
 │  │                                           
-│  ├─ gegelati                                       # git submodule pointing to gegelati develop commit: 9b4092f
-│  │  │...                                     
-│  │                                           
-│  ├─ armlearn-wrapper                               # git submodule pointing to the ArmLearn Environment
-│  │  │...                                           # wrapper for gegelati.
+│  ├─ armlearn-wrapper                               # git submodule pointant vers le wrapper du bras robot.
 │  │
-│  ├─ Notebook.ipynb                                 # Jupyter Notebook with Julia Kernel for plotting interesting 
-│  │                                                 # results from experiments.
+│  ├─ ScriptPubli.ipynb                              # Jupyter Notebook avec l'étude des résultats'.
+│  │
+│  ├─ README.md                                     
 │  │   
 │  ├─ data                                           # Experimental data.
 │  │  │                                        
 │  │  │                                        
 │  │  │                                        
-│  │  ├─ GegelatiExperimentalStudy                   # Folder containing the performances of all the
-│  │  │  │                                           # configurations tested for 2 hours
-│  │  │  │
-│  │  │  ├─ config_0_0                               # One configuration and seed.
-│  │  │  │  
-│  │  │  │  ├─ outLogs                               # Folder of logs.
-│  │  │  │  │
-│  │  │  │  │  ├─ codeGen                            # Folder with the code generation
-│  │  │  │  │  │
-│  │  │  │  │  ├─ logsGegelati.ods                   # Logs from the training.               
-│  │  │  │  │  │
-│  │  │  │  │  ├─ bestPolicyStats.md                 # Statistics of champion TPGs throughout the generations.
-│  │  │  │  │  │                      
-│  │  │  │  │  ├─ out_best.dot                       # Champion TPG after all generations.
-│  │  │  │  │  │
-│  │  │  │  │  ├─ out_best_cleaned.dot               # Champion cleaned from any useless teams and programs.
-│  │  │  │  │  │
-│  │  │  │  │  ├─ out_best_stats.md                  # Statistics about the champion.
-│  │  │  │  │  │
-│  │  │  │  │  ├─ out_best_stats_cleaned.md          # Statistics about the cleaned chamion.
-│  │  │  │  │  │
-│  │  │  │  │  ├─ outputGegelati.csv                 # Logs from the testing.
-│  │  │  │  |
-│  │  │  │  ├─ params                                # Folder with the parameters.
-│  │  │  ├─ ...       
 │  │  │
-│  │  ├─ GegelatiFinalTests                          # Folder containing the performances of the last
-│  │  │                                              # configuration tested for 12 hours
+│  │  ├─ config_0_0                                  # Une configuration et une graine.
 │  │  │  
-│  │  ├─ SAC                                         # Folder containing the performances of the SAC
-│  │   
-│  ├─ results                                        # Folder with the different figures obained
+│  │  │  ├─ outLogs                                  # Dossier de logs.
+│  │  │  │
+│  │  │  │  ├─ codeGen                               # Dossier avec le code généré.
+│  │  │  │  │
+│  │  │  │  ├─ bestPolicyStats.md                    # Statistiques du champion de chaque génération.
+│  │  │  │  │
+│  │  │  │  ├─ logsGegelati.ods                      # Logs d'entrainement.               
+│  │  │  │  │
+│  │  │  │  ├─ out_best_cleaned.dot                  # dotfiles du champion final après élagage.
+│  │  │  │  │
+│  │  │  │  ├─ out_best_stats_cleaned.md             # Statistiques du champion final après élagage.
+│  │  │  │  │
+│  │  │  │  ├─ out_best_stats.md                     # Statistiques du champion final.
+│  │  │  │  │                      
+│  │  │  │  ├─ out_best.dot                          # otfiles du champion final.
+│  │  │  │  │
+│  │  │  │  ├─ outputGegelati.csv                    # Logs des tests.
+│  │  │  |
+│  │  │  ├─ params                                   # Dossier contenant les paramètres.
+│  │  ├─ ...       
+│  │
+│  ├─ results                                        # Dossier avec les figures créées.
 ```
