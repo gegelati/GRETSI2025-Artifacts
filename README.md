@@ -1,5 +1,24 @@
 # PPSN 2024 Artifacts
 
+To execute the code, first clone the code and install the library
+```
+$ git clone https://github.com/gegelati/GRETSI2025.git
+$ cd GRETSI_2025/armlearn-wrapper
+$ ./scripts/dependencies_installation.sh
+```
+
+Then compile the wrapper code
+```
+$ mkdir build && cd build
+& cmake .. && cmake --build .
+```
+
+Different executables are created 
+
+
+## things
+
+
 This repository is associated to the following publication **(under review)**:
 
 *Q. Vacher, N. Beuve, P. Allaire, T. Marty, M. Dardaillon and K. Desnos. Low-complexity Genetic Reinforcement Learning for Robot Arm Trajectory Planning*
